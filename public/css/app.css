@@ -1234,6 +1234,7 @@ p, ul, ol, blockquote, .header-text, h1 {
 }
 .btn.btn_pink, .btn.btn_pink:before, .btn.btn_pink:after {
   border-color: #7940f5;
+  background-color: white;
 }
 .btn.btn_200w {
   text-align: center;

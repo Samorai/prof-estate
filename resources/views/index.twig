@@ -1,126 +1,63 @@
-<!DOCTYPE html>
-<html>
-  <head lang="en">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>prof-estate</title>
-    <link href="https://fonts.googleapis.com/css?family=Oswald:400,300,700" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="css/app.css">
-  </head>
-  <body>
-    <div class="wrap container">
-      <div class="nav">
-        <div class="col-800w">
-          <div class="nav__logo"><a href="/" class="icon icon-logo"></a></div>
-          <div class="nav__menu">
-            <div class="menu menu_main"><a href="#about-us">About us</a><a href="#team">Team</a><a href="#career">Career</a><a href="#contacts">Contacts</a><a href="#contacts">For developers</a><a href="#contacts">For brokers</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="main">
-        <div class="section col-1000w">
-          <h1>Result of analysis</h1>
-          <div class="graph">
-            <div class="graph__control">
-              <div class="switcher">
-                <label class="switcher-item">
-                  <input type="radio" name="type" value="Daily">
-                  <div class="switcher-item__content"><span class="icon fi-daily">Daily</span></div>
-                </label>
-                <label class="switcher-item">
-                  <input type="radio" name="type" value="Weekly">
-                  <div class="switcher-item__content"><span class="icon fi-daily">Weekly</span></div>
-                </label>
-                <label class="switcher-item">
-                  <input type="radio" name="type" value="Monthly" checked>
-                  <div class="switcher-item__content"><span class="icon fi-daily">Montly</span></div>
-                </label>
-              </div>
-              <div class="btn btn_shadow btn_icon"><i class="fi-download"></i></div>
-            </div>
-            <div class="graph__content"><img src="http://placehold.it/1000x350"></div>
-          </div>
-        </div>
-        <div class="section col-800w">
-          <div class="row border-between">
-            <div class="col-sm-5 col-sm-offset-1">
-              <div class="icon icon-bright section-icon"></div>
-              <div class="header-text">Is your online<br>channel effective?</div>
-            </div>
-            <div class="col-sm-6 section__text">
-              <div class="header-big pull-right">400</div>
-              <div class="header-text">The number of calls<br>that you have<br>to receive each month</div>
-              <p>If you do not get this amount of calls, you should analyze<br>your advertising activities on the Internet.</p>
-              <div class="header-text pink">Do you want to know<br>how to increase efficacy?</div>
-              <div class="btn btn_3d btn_pink">Order free express analysis</div>
-            </div>
-          </div>
-        </div>
-        <div class="section col-800w">
-          <div class="row border-between">
-            <div class="col-sm-5 col-sm-offset-1">
-              <div class="icon icon-exclamation section-icon"></div>
-              <div class="header-text">Your potential</div>
-            </div>
-            <div class="col-sm-6 section__text">
-              <div class="header-big pull-right">850</div>
-              <div class="header-text">The number of calls<br>that you can receive<br>each month</div>
-              <div class="header-text pink">Do you want to know<br>how to get it?</div>
-              <div class="btn btn_3d btn_pink">Order free express analysis</div>
-            </div>
-          </div>
-        </div>
-        <div class="section col-800w">
-          <div class="row border-between">
-            <div class="col-sm-5 col-sm-offset-1">
-              <div class="icon icon-winner section-icon"></div>
-              <div class="header-text">How are your<br>competitors?</div>
-            </div>
-            <div class="col-sm-6 section__text">
-              <div class="header-big pull-right green">20<span class="percent">%</span></div>
-              <div class="header-text">Your competitor site.ua<br>gets<span class="green"> more</span> traffic than you</div>
-              <div class="header-big pull-right red">30<span class="percent">%</span></div>
-              <div class="header-text">Your competitor site.ua<br> gets<span class="red"> less</span> traffic than you</div>
-              <div class="header-text pink">Do you want to now how<br>to get ahead of the competition?</div>
-              <div class="btn btn_3d btn_pink">Order free express analysis</div>
-            </div>
-          </div>
-        </div>
-        <div class="section col-1000w">
-          <div class="row">
-            <div class="col-sm-6">
-              <h1>Do you want to lower customer acquisition costs?</h1>
-              <p>Let's start with the analysis of your curren  online presence and compare it to best practices and your competitors:</p>
-              <ul class="pink">
-                <li>You vs best industry practices</li>
-                <li>You vs your closest competitors</li>
-              </ul>
-              <p>All you need to do is input your website and you will get your free custom made PDF report prepared by our market analysis team.</p>
-            </div>
-            <div class="col-sm-6 section__text">
-              <h1><br></h1>
-              <div class="form">
-                <label class="form__row">
-                  <div class="input-label">Your website</div>
-                  <input type="text" placeholder="https://" class="input">
-                </label>
-                <label class="form__row">
-                  <div class="input-label">Name</div>
-                  <input type="text" placeholder="type your name" class="input">
-                </label>
-                <label class="form__row">
-                  <div class="input-label">Email or phone</div>
-                  <input type="text" placeholder="type your email of phone number" class="input">
-                </label>
-                <div class="form__row">
-                  <div class="btn btn_3d btn_pink btn_200w pull-right">Order</div>
+{% extends 'inc/layout.twig' %}
+{% block main %}
+    <div class="section col-800w">
+        <h1>Analysis of activity<br>on the internet</h1>
+        <div class="form">
+            <label class="form__row row">
+                <div class="col-sm-3">
+                    <div class="input-label-big pink">Country</div>
                 </div>
-              </div>
-            </div>
-          </div>
+                <div class="col-sm-7 col-sm-offset-1">
+                    <div class="select">
+                        <select id="country_select">
+                            <option>UAE</option>
+                            <option>USA</option>
+                            <option>Ukraine</option>
+                            <option>France</option>
+                            <option>Germany</option>
+                            <option>UK</option>
+                        </select>
+                    </div>
+                </div>
+            </label>
+            <form id="search_form">
+                <label class="form__row row">
+                    <div class="col-sm-3">
+                        <div class="input-label-big pink">Your site</div>
+                    </div>
+                    <div class="col-sm-7 col-sm-offset-1">
+                        <input placeholder="type site" class="input" type="url" id="your_site" required>
+                    </div>
+                </label>
+                <div class="row">
+                    <div class="col-sm-7 col-sm-offset-4">
+                        <div class="block">
+                            <div class="light-header">Optional Fields</div>
+                        </div>
+                    </div>
+                </div>
+                <label class="form__row row">
+                    <div class="col-sm-3">
+                        <div class="input-label-big pink">Your competitor's site 1</div>
+                    </div>
+                    <div class="col-sm-7 col-sm-offset-1">
+                        <input placeholder="type your competitor's site 1 http://site.com/" class="input" type="url" id="competitor_site_1" required>
+                    </div>
+                </label>
+                <label class="form__row row">
+                    <div class="col-sm-3">
+                        <div class="input-label-big pink">Your competitor's site 2</div>
+                    </div>
+                    <div class="col-sm-7 col-sm-offset-1">
+                        <input placeholder="type your competitor's site 2 http://site.com/" class="input" type="url" id="competitor_site_2" required>
+                    </div>
+                </label>
+                <div class="form__row row">
+                    <div class="col-sm-7 col-sm-offset-4">
+                        <button class="btn btn_3d btn_pink pull-right btn_200w" id="search_button">Search</button>
+                    </div>
+                </div>
+            </form>
         </div>
-      </div>
     </div>
-    <script src="js/app.js"></script>
-  </body>
-</html>
+{% endblock %}

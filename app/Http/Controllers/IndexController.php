@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
+use Thunder\SimilarWebApi\ClientFacade as SimilarWebClient;
 
 class IndexController extends BaseController
 {
@@ -12,8 +13,9 @@ class IndexController extends BaseController
         return view('index.twig');
     }
 
-    public function form(Request $request)
+    public function result(Request $request, SimilarWebClient $similarWebClient)
     {
-        return view('form.twig');
+        //$resp = $similarWebClient->getTrafficProResponse('bookimed.com', 'weekly', '06-2015', '10-2015', false);
+        return view('result.twig');
     }
 }
