@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cc1a77a7673a5a644f7e07713c53d040",
-    "content-hash": "e3c184c80b3ab095473325c9b66d1f74",
+    "hash": "66d1022525b015708e229f7792f71cd0",
+    "content-hash": "fe091bb531989f67587d3dea1788540b",
     "packages": [
         {
             "name": "danielstjules/stringy",
@@ -599,12 +599,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "45991dd3ec7c3cd171262dcc0039f98a2a8fe4be"
+                "reference": "2a5299c7e8d7d504ae3c33ef82731fff40fa3ee2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/45991dd3ec7c3cd171262dcc0039f98a2a8fe4be",
-                "reference": "45991dd3ec7c3cd171262dcc0039f98a2a8fe4be",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/2a5299c7e8d7d504ae3c33ef82731fff40fa3ee2",
+                "reference": "2a5299c7e8d7d504ae3c33ef82731fff40fa3ee2",
                 "shasum": ""
             },
             "require": {
@@ -650,7 +650,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2015-11-06 14:44:31"
+            "time": "2015-11-13 21:30:59"
         },
         {
             "name": "illuminate/encryption",
@@ -846,12 +846,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/http.git",
-                "reference": "0fd17b1a9411bd764ecca9179d60393fcc93163a"
+                "reference": "5810acf124fd259d9704ab727350fe2f96eb06f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/http/zipball/0fd17b1a9411bd764ecca9179d60393fcc93163a",
-                "reference": "0fd17b1a9411bd764ecca9179d60393fcc93163a",
+                "url": "https://api.github.com/repos/illuminate/http/zipball/5810acf124fd259d9704ab727350fe2f96eb06f4",
+                "reference": "5810acf124fd259d9704ab727350fe2f96eb06f4",
                 "shasum": ""
             },
             "require": {
@@ -884,7 +884,7 @@
             ],
             "description": "The Illuminate Http package.",
             "homepage": "http://laravel.com",
-            "time": "2015-10-19 06:01:02"
+            "time": "2015-11-12 16:04:23"
         },
         {
             "name": "illuminate/pagination",
@@ -980,12 +980,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/queue.git",
-                "reference": "cdce7be9d7ead0b4e11e76f8f6478cb886ff3ce1"
+                "reference": "b10e768a6f47d08843ddf02fd5a4cae4f1f10ed6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/queue/zipball/cdce7be9d7ead0b4e11e76f8f6478cb886ff3ce1",
-                "reference": "cdce7be9d7ead0b4e11e76f8f6478cb886ff3ce1",
+                "url": "https://api.github.com/repos/illuminate/queue/zipball/b10e768a6f47d08843ddf02fd5a4cae4f1f10ed6",
+                "reference": "b10e768a6f47d08843ddf02fd5a4cae4f1f10ed6",
                 "shasum": ""
             },
             "require": {
@@ -1001,7 +1001,7 @@
             "suggest": {
                 "aws/aws-sdk-php": "Required to use the SQS queue driver (~3.0).",
                 "illuminate/redis": "Required to use the redis queue driver (5.1.*).",
-                "iron-io/iron_mq": "Required to use the iron queue driver (~2.0).",
+                "iron-io/iron_mq": "Required to use the iron queue driver (~2.0|~4.0).",
                 "pda/pheanstalk": "Required to use the beanstalk queue driver (~3.0)."
             },
             "type": "library",
@@ -1030,7 +1030,7 @@
             ],
             "description": "The Illuminate Queue package.",
             "homepage": "http://laravel.com",
-            "time": "2015-10-28 19:38:40"
+            "time": "2015-11-08 18:47:06"
         },
         {
             "name": "illuminate/session",
@@ -1088,12 +1088,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "93593da7bec6f53805307907aa071905aebb1e1f"
+                "reference": "68817d142a8f212aa24bc5e7f4f75e2fc4749d31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/93593da7bec6f53805307907aa071905aebb1e1f",
-                "reference": "93593da7bec6f53805307907aa071905aebb1e1f",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/68817d142a8f212aa24bc5e7f4f75e2fc4749d31",
+                "reference": "68817d142a8f212aa24bc5e7f4f75e2fc4749d31",
                 "shasum": ""
             },
             "require": {
@@ -1134,7 +1134,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "http://laravel.com",
-            "time": "2015-11-10 14:30:06"
+            "time": "2015-11-11 23:28:20"
         },
         {
             "name": "illuminate/translation",
@@ -1187,12 +1187,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/validation.git",
-                "reference": "69601ff9aeec665981f30ee3f6be9d2a9de93779"
+                "reference": "d3d73f754abba7288d83200e8dbe35034cbac82b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/validation/zipball/69601ff9aeec665981f30ee3f6be9d2a9de93779",
-                "reference": "69601ff9aeec665981f30ee3f6be9d2a9de93779",
+                "url": "https://api.github.com/repos/illuminate/validation/zipball/d3d73f754abba7288d83200e8dbe35034cbac82b",
+                "reference": "d3d73f754abba7288d83200e8dbe35034cbac82b",
                 "shasum": ""
             },
             "require": {
@@ -1229,7 +1229,7 @@
             ],
             "description": "The Illuminate Validation package.",
             "homepage": "http://laravel.com",
-            "time": "2015-10-31 18:36:49"
+            "time": "2015-11-06 14:46:16"
         },
         {
             "name": "illuminate/view",
@@ -1277,6 +1277,63 @@
             "description": "The Illuminate View package.",
             "homepage": "http://laravel.com",
             "time": "2015-10-19 06:01:02"
+        },
+        {
+            "name": "jenssegers/mongodb",
+            "version": "v2.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jenssegers/laravel-mongodb.git",
+                "reference": "979dc80141b388c27cc3145dc474516d37467b00"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jenssegers/laravel-mongodb/zipball/979dc80141b388c27cc3145dc474516d37467b00",
+                "reference": "979dc80141b388c27cc3145dc474516d37467b00",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/container": "^5.1",
+                "illuminate/database": "^5.1",
+                "illuminate/events": "^5.1",
+                "illuminate/support": "^5.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "*",
+                "orchestra/testbench": "~3.1.0",
+                "satooshi/php-coveralls": "*"
+            },
+            "suggest": {
+                "jenssegers/mongodb-sentry": "Add Sentry support to Laravel-MongoDB",
+                "jenssegers/mongodb-session": "Add MongoDB session support to Laravel-MongoDB"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Jenssegers\\Mongodb": "src/",
+                    "Jenssegers\\Eloquent": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jens Segers",
+                    "homepage": "http://jenssegers.be"
+                }
+            ],
+            "description": "A MongoDB based Eloquent model and Query builder for Laravel 4",
+            "keywords": [
+                "database",
+                "eloquent",
+                "laravel",
+                "model",
+                "mongo",
+                "mongodb"
+            ],
+            "time": "2015-10-15 12:07:24"
         },
         {
             "name": "laravel/lumen-framework",
@@ -2351,12 +2408,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "b7c124bae00ab0a019a084c6b99f1df023bcb996"
+                "reference": "9d5e74602634cdd1e7899cddcbded01bc584f7a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/b7c124bae00ab0a019a084c6b99f1df023bcb996",
-                "reference": "b7c124bae00ab0a019a084c6b99f1df023bcb996",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/9d5e74602634cdd1e7899cddcbded01bc584f7a8",
+                "reference": "9d5e74602634cdd1e7899cddcbded01bc584f7a8",
                 "shasum": ""
             },
             "require": {
@@ -2404,7 +2461,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-11-08 09:55:30"
+            "time": "2015-11-12 06:56:39"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -2913,12 +2970,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6cc501c1adf86482fbb54fb2958e1c7685f57a61"
+                "reference": "6f9251d0910483fcbe22ee7a47ed604e43070770"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6cc501c1adf86482fbb54fb2958e1c7685f57a61",
-                "reference": "6cc501c1adf86482fbb54fb2958e1c7685f57a61",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6f9251d0910483fcbe22ee7a47ed604e43070770",
+                "reference": "6f9251d0910483fcbe22ee7a47ed604e43070770",
                 "shasum": ""
             },
             "require": {
@@ -2977,7 +3034,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-11-10 21:39:46"
+            "time": "2015-11-11 12:23:02"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

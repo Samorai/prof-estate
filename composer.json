@@ -10,7 +10,8 @@
         "laravel/lumen-framework": "5.1.*",
         "vlucas/phpdotenv": "~1.0",
         "egiw/lumen-twig": "dev-master",
-        "thunderer/similarweb-api": "dev-master"
+        "thunderer/similarweb-api": "dev-master",
+        "jenssegers/mongodb": "^2.2"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",

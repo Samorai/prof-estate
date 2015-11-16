@@ -3,30 +3,28 @@
     <div class="section col-800w">
         <h1>Analysis of activity<br>on the internet</h1>
         <div class="form">
-            <label class="form__row row">
-                <div class="col-sm-3">
-                    <div class="input-label-big pink">Country</div>
-                </div>
-                <div class="col-sm-7 col-sm-offset-1">
-                    <div class="select">
-                        <select id="country_select">
-                            <option>UAE</option>
-                            <option>USA</option>
-                            <option>Ukraine</option>
-                            <option>France</option>
-                            <option>Germany</option>
-                            <option>UK</option>
-                        </select>
+            <form id="search_form" method="POST" action="/result">
+                <label class="form__row row">
+                    <div class="col-sm-3">
+                        <div class="input-label-big pink">Country</div>
                     </div>
-                </div>
-            </label>
-            <form id="search_form">
+                    <div class="col-sm-7 col-sm-offset-1">
+                        <div class="select">
+                            <select id="country_select" name="country_select">
+                                {% for potential in potentials %}
+                                    <option value="{{ potential }}">{{ potential }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </label>
+                <input type="hidden" name="_token" value="{{ csrf_token }}">
                 <label class="form__row row">
                     <div class="col-sm-3">
                         <div class="input-label-big pink">Your site</div>
                     </div>
                     <div class="col-sm-7 col-sm-offset-1">
-                        <input placeholder="type site" class="input" type="url" id="your_site" required>
+                        <input placeholder="type site" class="input" type="url" name="your_site" id="your_site" required>
                     </div>
                 </label>
                 <div class="row">
@@ -41,7 +39,7 @@
                         <div class="input-label-big pink">Your competitor's site 1</div>
                     </div>
                     <div class="col-sm-7 col-sm-offset-1">
-                        <input placeholder="type your competitor's site 1 http://site.com/" class="input" type="url" id="competitor_site_1" required>
+                        <input placeholder="type your competitor's site 1 http://site.com/" class="input" type="url" id="competitor_site_1" name="competitor_site_1">
                     </div>
                 </label>
                 <label class="form__row row">
@@ -49,7 +47,7 @@
                         <div class="input-label-big pink">Your competitor's site 2</div>
                     </div>
                     <div class="col-sm-7 col-sm-offset-1">
-                        <input placeholder="type your competitor's site 2 http://site.com/" class="input" type="url" id="competitor_site_2" required>
+                        <input placeholder="type your competitor's site 2 http://site.com/" class="input" type="url" id="competitor_site_2" name="competitor_site_2">
                     </div>
                 </label>
                 <div class="form__row row">

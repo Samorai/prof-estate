@@ -1,16 +1,47 @@
 (function () {
     'use strict';
     window.appName = 'prof-estate';
-    $(document).ready(function(){
-        $("#search_form").submit(function(event){
+    $(document).ready(function () {
+        $("#form_order").submit(function (event) {
             event.preventDefault();
-            var obj = {
-                country : $("#country_select").val(),
-                your_site: $("#your_site").val(),
-                competitor_1: $("#competitor_site_1").val(),
-                competitor_2: $("#competitor_site_2").val()
-            }
-
+            $.post('/order', {
+                website_name: $("#website_name").val(),
+                user_name: $("#user_name").val(),
+                contact_info: $("#contact_info").val(),
+                _token: $("#_token").val()
+            }, function(){alert('Success');});
         });
     });
 })();
+
+function makeGraph() {
+    $.getJSON('/result', function (answer) {
+        console.log(answer);
+        $('#container').highcharts({
+            title: {
+                text: answer.data.name,
+                align: 'left'
+            },
+            xAxis: {
+                tickWidth: 0, gridLineWidth: 1, labels: {align: 'left'},
+                categories: answer.data.dates
+            },
+            yAxis: {title: {text: 'Visits'}, plotLines: [{value: 0, width: 1, color: '#808080'}]},
+            legend: {
+                align: 'left',
+                verticalAlign: 'top',
+                y: 10,
+                floating: true,
+                borderWidth: 0
+            },
+
+            tooltip: {
+                shared: true,
+                crosshairs: true
+            },
+            series: answer.data.series
+        });
+    });
+};
+
+

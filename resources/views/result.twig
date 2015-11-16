@@ -4,27 +4,7 @@
         <h1>Result of analysis</h1>
 
         <div class="graph">
-            <div class="graph__control">
-                <div class="switcher">
-                    <label class="switcher-item">
-                        <input type="radio" name="type" value="Daily">
-
-                        <div class="switcher-item__content"><span class="icon fi-daily">Daily</span></div>
-                    </label>
-                    <label class="switcher-item">
-                        <input type="radio" name="type" value="Weekly">
-
-                        <div class="switcher-item__content"><span class="icon fi-daily">Weekly</span></div>
-                    </label>
-                    <label class="switcher-item">
-                        <input type="radio" name="type" value="Monthly" checked>
-
-                        <div class="switcher-item__content"><span class="icon fi-daily">Montly</span></div>
-                    </label>
-                </div>
-                <div class="btn btn_shadow btn_icon"><i class="fi-download"></i></div>
-            </div>
-            <div class="graph__content"><img src="http://placehold.it/1000x350"></div>
+            <div class="graph__content" id="container"></div>
         </div>
     </div>
     <div class="section col-800w">
@@ -34,13 +14,13 @@
                 <div class="header-text">Is your online<br>channel effective?</div>
             </div>
             <div class="col-sm-6 section__text">
-                <div class="header-big pull-right">400</div>
+                <div class="header-big pull-right">{{ channel_efficiency }}</div>
                 <div class="header-text">The number of calls<br>that you have<br>to receive each month</div>
                 <p>If you do not get this amount of calls, you should analyze<br>your advertising activities on the
                     Internet.</p>
 
                 <div class="header-text pink">Do you want to know<br>how to increase efficacy?</div>
-                <div class="btn btn_3d btn_pink">Order free express analysis</div>
+                <div class="btn btn_3d btn_pink"  onclick="location.href='#submit_form'; $('#bottom_form_name').focus();">Order free express analysis</div>
             </div>
         </div>
     </div>
@@ -51,37 +31,37 @@
                 <div class="header-text">Your potential</div>
             </div>
             <div class="col-sm-6 section__text">
-                <div class="header-big pull-right">850</div>
+                <div class="header-big pull-right">{{ potential_calls }}</div>
                 <div class="header-text">The number of calls<br>that you can receive<br>each month</div>
                 <div class="header-text pink">Do you want to know<br>how to get it?</div>
-                <div class="btn btn_3d btn_pink">Order free express analysis</div>
+                <div class="btn btn_3d btn_pink"  onclick="location.href='#submit_form'; $('#bottom_form_name').focus();">Order free express analysis</div>
             </div>
         </div>
     </div>
-    <div class="section col-800w">
-        <div class="row border-between">
-            <div class="col-sm-5 col-sm-offset-1">
-                <div class="icon icon-winner section-icon"></div>
-                <div class="header-text">How are your<br>competitors?</div>
-            </div>
-            <div class="col-sm-6 section__text">
-                <div class="header-big pull-right green">20<span class="percent">%</span></div>
-                <div class="header-text">Your competitor site.ua<br>gets<span class="green"> more</span> traffic than
-                    you
+    {% if competitors_traffic_data %}
+        <div class="section col-800w">
+            <div class="row border-between">
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="icon icon-winner section-icon"></div>
+                    <div class="header-text">How are your<br>competitors?</div>
                 </div>
-                <div class="header-big pull-right red">30<span class="percent">%</span></div>
-                <div class="header-text">Your competitor site.ua<br> gets<span class="red"> less</span> traffic than you
+                <div class="col-sm-6 section__text">
+                    {% for data in competitors_traffic_data %}
+                        <div class="header-big pull-right {{ data.class }}">{{ data.traffic_diff }}<span class="percent">%</span></div>
+                        <div class="header-text">Your competitor {{ data.site }}<br>gets<span class="{{ data.class }}"> {{ data.word }}</span> traffic than
+                            you
+                        </div>
+                    {% endfor %}
+                    <div class="header-text pink">Do you want to now how<br>to get ahead of the competition?</div>
+                    <div class="btn btn_3d btn_pink" onclick="location.href='#submit_form'; $('#bottom_form_name').focus();">Order free express analysis</div>
                 </div>
-                <div class="header-text pink">Do you want to now how<br>to get ahead of the competition?</div>
-                <div class="btn btn_3d btn_pink">Order free express analysis</div>
             </div>
         </div>
-    </div>
+    {% endif %}
     <div class="section col-1000w">
         <div class="row">
             <div class="col-sm-6">
                 <h1>Do you want to lower customer acquisition costs?</h1>
-
                 <p>Let's start with the analysis of your curren online presence and compare it to best practices and
                     your competitors:</p>
                 <ul class="pink">
@@ -92,27 +72,36 @@
                     by our market analysis team.</p>
             </div>
             <div class="col-sm-6 section__text">
-                <h1><br></h1>
-
-                <div class="form">
+                <br>
+            <form id="form_order">
+                <input type="hidden" name="_token" id="_token" value="{{ csrf_token }}">
+                <div class="form" id="submit_form">
                     <label class="form__row">
                         <div class="input-label">Your website</div>
-                        <input type="text" placeholder="https://" class="input">
+                        <input type="text" placeholder="https://" class="input" value="{{ website }}" name="website_name" id="website_name" required>
                     </label>
                     <label class="form__row">
                         <div class="input-label">Name</div>
-                        <input type="text" placeholder="type your name" class="input">
+                        <input type="text" placeholder="type your name" class="input" id="bottom_form_name" name="user_name" id="user_name" required>
                     </label>
                     <label class="form__row">
                         <div class="input-label">Email or phone</div>
-                        <input type="text" placeholder="type your email of phone number" class="input">
+                        <input type="text" placeholder="type your email of phone number" class="input" name="contact_info" id="contact_info" required>
                     </label>
 
                     <div class="form__row">
-                        <div class="btn btn_3d btn_pink btn_200w pull-right">Order</div>
+                        <button class="btn btn_3d btn_pink btn_200w pull-right">Order</button>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
     </div>
+{% endblock %}
+{% block js %}
+    <script>
+        $(document).ready(function(){
+            makeGraph();
+        });
+    </script>
 {% endblock %}

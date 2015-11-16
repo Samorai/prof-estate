@@ -1,3 +1,5 @@
 <?php
 $app->get('/', ['uses' => 'IndexController@index']);
-$app->get('/result', ['uses' => 'IndexController@result']);
+$app->post('/result', ['uses' => 'IndexController@result']);
+$app->get('/result', ['uses' => 'IndexController@jsonResult']);
+$app->post('/order', ['uses' => 'IndexController@order']);
