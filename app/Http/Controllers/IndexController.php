@@ -187,7 +187,9 @@ class IndexController extends BaseController
     {
         $greater = ($first > $second) ? $first : $second;
         $smaller = ($first < $second) ? $first : $second;
-
+        if ($smaller == 0) {
+            $smaller = 1;
+        }
         return round(($greater - $smaller) / $smaller * 100);
     }
 }
