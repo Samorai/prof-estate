@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Services\Response;
 use App\Models\Potentials;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Laravel\Lumen\Routing\Controller as BaseController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Thunder\SimilarWebApi\ClientFacade as SimilarWebClient;
 
 class IndexController extends BaseController
@@ -107,6 +107,9 @@ class IndexController extends BaseController
 
         $potential = $request->session()->get('potential');
         $website_traffic = $request->session()->get('website_traffic');
+        if (empty($potential) || empty($website_traffic)) {
+            throw new NotFoundHttpException;
+        }
         $potential = $this->managePotential($potential, $website_traffic);
         $series[] = [
             'name' => $request->session()->get('website'),
@@ -135,12 +138,15 @@ class IndexController extends BaseController
         return $response->json(['name' => $name, 'dates' => $dates, 'series' => $series]);
     }
 
+    /**
+     * @param \Illuminate\Http\Request $request
+     */
     public function order(Request $request)
     {
         $body = sprintf("Website: %s \nContact name: %s\nContact: %s\n", $request->get('website_name'),
             $request->get('user_name'), $request->get('contact_info'));
 
-        mail('oleg.samorai@gmail.com, arismiatov@prof.estate', 'Order: Express Analysis', $body);
+        mail(join(',', config('emails')), 'Order: Express Analysis', $body);
     }
 
     private function managePotential($potential, $traffic)

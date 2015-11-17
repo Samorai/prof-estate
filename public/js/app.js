@@ -42,6 +42,6 @@ function makeGraph() {
             series: answer.data.series
         });
     });
-};
+}
 
 

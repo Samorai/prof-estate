@@ -4,6 +4,11 @@ namespace App\Models;
 class Potentials extends Base
 {
 
+    protected $attributes = [
+        'name' => '',
+        'potentials' => [],
+    ];
+
     private $potentials = [
         'UAE' => [
             40000, 42000, 43000, 45000, 43000, 46000, 48000, 50000, 47000, 46000, 48000, 46000

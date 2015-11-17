@@ -1,0 +1,20 @@
+{% extends 'inc/admin_layout.twig' %}
+{% block body %}
+<form method="post" action="/admin/potential">
+    <input type="hidden" name="_token" value="{{ csrf_token }}">
+    Name: <input type="text" class="form-control" name="name">
+    <table class="table tabbed-pane">
+        <tr>
+            {% for i in 1..12 %}
+                <td>{{ i }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for i in 1..12 %}
+                <td><input type="text" class="form-control" name="potentials[]"></td>
+            {% endfor %}
+        </tr>
+    </table>
+    <button class="btn-default">Save</button>
+</form>
+{% endblock %}

@@ -19,6 +19,8 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
+$app->register('Jenssegers\Mongodb\MongodbServiceProvider');
+
 $app->withFacades();
 
 $app->withEloquent();
@@ -61,9 +63,9 @@ $app->middleware([
       Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
 ]);
 
-// $app->routeMiddleware([
-
-// ]);
+$app->routeMiddleware([
+    'auth' => 'App\Http\Middleware\AuthMiddleware',
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -91,8 +93,10 @@ $app->register(App\Providers\SimilarWebServiceProvider::class);
 | can respond to, as well as the controllers that may handle them.
 |
 */
-
+$app->configure('database');
 $app->configure('view');
+$app->configure('users');
+$app->configure('emails');
 
 $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
     require __DIR__.'/../app/Http/routes.php';
