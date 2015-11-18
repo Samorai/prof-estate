@@ -29,7 +29,7 @@ class IndexController extends BaseController
     public function result(Request $request, SimilarWebClient $similarWebClient, Potentials $potentials)
     {
         $website = $request->get('your_site');
-        $website_host = parse_url($website)['host'];
+        $website_host = preg_replace("(^https?://|^www\\.)", "", $website);
         $full_month = strtotime('now -1 months');
         $start_checking = strtotime('now -6 months');
 
@@ -40,15 +40,17 @@ class IndexController extends BaseController
 
         $potential = $potentials->getPotential($request->get('country_select'), $month_start, $month_end);
 
-        $potential_calls = round(((end($potential) + prev($potential) + prev($potential)) / 3) * 0.02);
-
-        $resp = $similarWebClient->getTrafficProResponse(
-            $website_host,
-            'monthly',
-            $start_site_checking,
-            $end_site_checking,
-            false
-        )->getValues();
+        try {
+            $resp = $similarWebClient->getTrafficProResponse(
+                $website_host,
+                'monthly',
+                $start_site_checking,
+                $end_site_checking,
+                false
+            )->getValues();
+        } catch (\Exception $e){
+            $resp = [0,0,0,0,0,0];
+        }
         $website_traffic = array_values($resp);
 
         $channel_efficiency = round(((end($website_traffic) + prev($website_traffic) + prev($website_traffic)) / 3) * 0.02);
@@ -66,6 +68,13 @@ class IndexController extends BaseController
             $competitors_traffic_data[] = $this->getCompetitorsData($similarWebClient, $start_site_checking,
                 $end_site_checking, $website_traffic_sum, $competitor_site_2);
         }
+
+        $potential = $this->managePotential($potential, $website_traffic);
+        foreach ($competitors_traffic_data as $competitor)
+        {
+            $potential = $this->managePotential($potential, $competitor['traffic']);
+        }
+        $potential_calls = round(((end($potential) + prev($potential) + prev($potential)) / 3) * 0.02);
 
         session([
             'start' => $start_checking,
@@ -107,9 +116,6 @@ class IndexController extends BaseController
 
         $potential = $request->session()->get('potential');
         $website_traffic = $request->session()->get('website_traffic');
-        if (empty($potential) || empty($website_traffic)) {
-            throw new NotFoundHttpException;
-        }
         $potential = $this->managePotential($potential, $website_traffic);
         $series[] = [
             'name' => $request->session()->get('website'),
@@ -118,11 +124,11 @@ class IndexController extends BaseController
             'marker' => ['symbol' => 'circle'],
         ];
         $competitors = $request->session()->get('competitors', []);
-        foreach ($competitors as $competitor) {
+        foreach ($competitors as $key=>$competitor) {
             $series[] = [
                 'name' => $competitor['site'],
                 'data' => $competitor['traffic'],
-                'color' => 'green',
+                'color' => ($key == 0) ? 'green' : 'orange',
                 'marker' => ['symbol' => 'circle'],
             ];
             $potential = $this->managePotential($potential, $competitor['traffic']);
@@ -162,14 +168,18 @@ class IndexController extends BaseController
 
     private function getCompetitorsData($similarWebClient, $start, $end, $website_traffic, $competitor_site)
     {
-        $competitor_site_host = parse_url($competitor_site)['host'];
-        $resp = $similarWebClient->getTrafficProResponse(
-            $competitor_site_host,
-            'monthly',
-            $start,
-            $end,
-            false
-        )->getValues();
+        $competitor_site_host = preg_replace("(^https?://|^www\\.)", "", $competitor_site );
+        try {
+            $resp = $similarWebClient->getTrafficProResponse(
+                $competitor_site_host,
+                'monthly',
+                $start,
+                $end,
+                false
+            )->getValues();
+        } catch (\Exception $e){
+            $resp = [0,0,0,0,0,0];
+        }
 
         $competitor_traffic = array_values($resp);
         $competitor_traffic_sum = array_sum($competitor_traffic);

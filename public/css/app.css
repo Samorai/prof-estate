@@ -1025,12 +1025,15 @@ input, button, textarea, select {
   margin-bottom: 80px;
   margin-top: 80px;
 }
+.menu-active{
+    margin-top: 200px;
+}
 
 .menu.menu_main {
   line-height: 56px;
 }
 .menu a {
-  margin-left: 32px;
+  margin-left: 25px;
   text-transform: uppercase;
   font-weight: 500;
   font-size: 13px;
@@ -1042,7 +1045,7 @@ input, button, textarea, select {
 
 .header-big {
   font-size: 60px;
-  line-height: 1;
+  line-height: 1.285;
   font-weight: 500;
 }
 .header-big .percent {
@@ -1277,8 +1280,118 @@ p, ul, ol, blockquote, .header-text, h1 {
 }
 @media screen and (min-width: 768px) {
   .section .section__text {
-    padding-left: 70px;
+    padding-left: 45px;
   }
+}
+@media (max-width: 767px) {
+    .main-menu__item {
+        display: block;
+    }
+}
+nav ul {
+    padding: 0;
+    margin: 0 auto;
+    width: 600px;
+    height: 40px;
+}
+
+nav li {
+    display: inline;
+    float: left;
+}
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    *zoom: 1;
+}
+
+nav a {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    line-height: 40px;
+}
+nav a#pull {
+    display: none;
+}
+
+@media screen and (max-width: 682px) {
+    nav {
+        height: auto;
+    }
+    nav ul {
+        width: 100%;
+        display: block;
+        height: auto;
+    }
+    nav li {
+        width: 50%;
+        float: left;
+        position: relative;
+    }
+    nav a {
+        text-align: left;
+        width: 100%;
+        text-indent: 25px;
+    }
+}
+
+@media only screen and (max-width : 682px) {
+    nav {
+        border-bottom: 0;
+    }
+    nav ul {
+        width: 100%;
+        display: none;
+        height: auto;
+    }
+    nav li {
+        width: 50%;
+        float: left;
+        position: relative;
+    }
+    nav a {
+        text-align: left;
+        width: 100%;
+        text-indent: 25px;
+    }
+    nav a#pull {
+        display: block;
+        width: 100%;
+        position: relative;
+    }
+    .menu-icons {
+        padding-top: 23px;
+        padding-bottom: 23px;
+    }
+    .menu-icons__item {
+        width: 16px;
+        height: 3px;
+        margin-bottom: 2px;
+        display: block;
+        background-color: #008fe9;
+    }
+    .menu-icons.active {
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+}
+
+@media only screen and (max-width : 320px) {
+    nav li {
+        display: block;
+        float: none;
+        width: 100%;
+    }
 }
 
 .form__row {

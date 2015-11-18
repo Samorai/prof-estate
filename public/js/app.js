@@ -11,6 +11,23 @@
                 _token: $("#_token").val()
             }, function(){alert('Success');});
         });
+        var pull = $('#pull'),
+            menu = $('nav ul');
+
+        $(pull).on('click', function(e) {
+            e.preventDefault();
+            menu.slideToggle();
+            $(".menu-icons").toggleClass('active', '');
+            $(".main").toggleClass('menu-active', '');
+        });
+
+        $(window).resize(function(){
+            var w = $(window).width();
+            if(w > 320 && menu.is(':hidden')) {
+                menu.removeAttr('style');
+                $(".main").toggleClass('menu-active', '');
+            }
+        });
     });
 })();
 
