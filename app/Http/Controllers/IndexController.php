@@ -147,7 +147,7 @@ class IndexController extends BaseController
 
         $series[] = [
             'name' => 'Potential',
-            'data' => $potential,
+            'data' =>  array_map('intval', $potential),
             'color' => 'red',
             'marker' => ['symbol' => 'circle'],
         ];
