@@ -25,7 +25,7 @@
             var w = $(window).width();
             if(w > 320 && menu.is(':hidden')) {
                 menu.removeAttr('style');
-                $(".main").toggleClass('menu-active', '');
+                $(".main").removeClass('menu-active');
             }
         });
     });

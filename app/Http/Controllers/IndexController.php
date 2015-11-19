@@ -29,7 +29,7 @@ class IndexController extends BaseController
     public function result(Request $request, SimilarWebClient $similarWebClient, Potentials $potentials)
     {
         $website = $request->get('your_site');
-        $website_host = preg_replace("(^https?://|^www\\.)", "", $website);
+        $website_host = preg_replace("(^https?://(www\\.)?|^www\\.)", "", $website);
         $full_month = strtotime('now -1 months');
         $start_checking = strtotime('now -6 months');
 
@@ -168,7 +168,7 @@ class IndexController extends BaseController
 
     private function getCompetitorsData($similarWebClient, $start, $end, $website_traffic, $competitor_site)
     {
-        $competitor_site_host = preg_replace("(^https?://|^www\\.)", "", $competitor_site );
+        $competitor_site_host = preg_replace("(^https?://(www\\.)?|^www\\.)", "", $competitor_site );
         try {
             $resp = $similarWebClient->getTrafficProResponse(
                 $competitor_site_host,
