@@ -15,4 +15,5 @@ $app->group(['prefix' => '/admin', 'middleware' => 'auth', 'namespace' => 'App\H
     $app->post('/potential', ['uses' => 'AdminController@updatePotential']);
     $app->get('/checked/view/{id}', ['uses' => 'AdminController@viewChecked']);
     $app->get('/checked/data/{id}', ['uses' => 'AdminController@dataChecked']);
+    $app->get('/checked/delete/{id}', ['uses' => 'AdminController@deleteChecked']);
 });

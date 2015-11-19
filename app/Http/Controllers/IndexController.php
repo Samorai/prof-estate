@@ -175,7 +175,7 @@ class IndexController extends BaseController
     {
         foreach ($traffic as $key => $value) {
             if ($potential[$key] <= $value) {
-                $potential[$key] = $value + $value * (rand(1, 2) / 10);
+                $potential[$key] = intval($value + $value * (rand(1, 2) / 10));
             }
         }
 

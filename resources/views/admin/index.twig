@@ -14,7 +14,10 @@
                 <td>{{ checkedSite.country }}</td>
                 <td>{{ checkedSite.competitors[0] }}</td>
                 <td>{{ checkedSite.competitors[1] }}</td>
-                <td><a href="/admin/checked/view/{{ checkedSite.id }}">View</a></td>
+                <td>
+                    <button class="btn btn-default" href="/admin/checked/view/{{ checkedSite.id }}">View</button>
+                    <a class="btn btn-danger" onclick="if (!confirm('Are you sure?')){return false;}" href="/admin/checked/delete/{{ checkedSite.id }}">Delete</a>
+                </td>
             </tr>
         {% endfor %}
     </table>

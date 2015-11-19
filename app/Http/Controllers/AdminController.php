@@ -27,6 +27,13 @@ class AdminController extends BaseController
         );
     }
 
+    public function deleteChecked($id)
+    {
+        CheckedSites::findById($id)->delete();
+
+        return redirect('/admin');
+    }
+
     public function dataChecked($id, Response $response)
     {
         $checked = CheckedSites::findById($id);
