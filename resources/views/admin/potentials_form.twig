@@ -2,7 +2,7 @@
 {% block body %}
 <form method="post" action="/admin/potential">
     <input type="hidden" name="_token" value="{{ csrf_token }}">
-    Name: <input type="text" class="form-control" name="name">
+    Name: <input type="text" class="form-control" name="name" value="{{ potential.name }}">
     <table class="table tabbed-pane">
         <tr>
             {% for i in 1..12 %}
@@ -11,9 +11,12 @@
         </tr>
         <tr>
             {% for i in 1..12 %}
-                <td><input type="text" class="form-control" name="potentials[]"></td>
+                <td><input type="text" class="form-control" name="potentials[]" value="{{ potential.potentials[i] }}"></td>
             {% endfor %}
         </tr>
+        {% if potential %}
+            <input type="hidden" name="id" value="{{ potential.id }}">
+        {% endif %}
     </table>
     <button class="btn-default">Save</button>
 </form>

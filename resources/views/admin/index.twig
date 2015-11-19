@@ -1,4 +1,19 @@
 {% extends 'inc/admin_layout.twig' %}
 {% block body %}
-    :D
+    <table class="table table-bordered">
+        <tr>
+            <th>Name</th>
+            <th>First Competitor</th>
+            <th>Second competitor</th>
+            <th>&nbsp;</th>
+        </tr>
+        {% for checkedSite in checkedSites %}
+            <tr>
+                <td>{{ checkedSite.website }}</td>
+                <td>{{ checkedSite.competitors[0] }}</td>
+                <td>{{ checkedSite.competitors[1] }}</td>
+                <td><a href="/admin/checked/view/{{ checkedSite.id }}">View</a></td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

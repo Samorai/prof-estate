@@ -1,0 +1,46 @@
+{% extends 'inc/admin_layout.twig' %}
+{% block body %}
+    <h1>Checked site {{ checkedSite.website }}</h1>
+    {% if checkedSite.competitors %}
+        <h2>Competitors</h2>
+        <ul>
+            {% for competitor in checkedSite.competitors %}
+                <li>{{ competitor }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="graph">
+        <div class="graph__content" id="container"></div>
+    </div>
+    <script type="application/javascript">
+        $(document).ready(function(){
+            $.getJSON("/admin/checked/data/{{ checkedSite.id }}", function (answer) {
+                console.log(answer);
+                $('#container').highcharts({
+                    title: {
+                        text: answer.data.name,
+                        align: 'left'
+                    },
+                    xAxis: {
+                        tickWidth: 0, gridLineWidth: 1, labels: {align: 'left'},
+                        categories: answer.data.dates
+                    },
+                    yAxis: {title: {text: 'Visits'}, plotLines: [{value: 0, width: 1, color: '#808080'}]},
+                    legend: {
+                        align: 'left',
+                        verticalAlign: 'top',
+                        y: 10,
+                        floating: true,
+                        borderWidth: 0
+                    },
+
+                    tooltip: {
+                        shared: true,
+                        crosshairs: true
+                    },
+                    series: answer.data.series
+                });
+            });
+        });
+    </script>
+{% endblock %}

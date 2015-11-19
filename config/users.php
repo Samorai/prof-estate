@@ -1,4 +1,4 @@
 <?php
 return [
-    'sam' => '1'
+    'admin' => '7TkHcAZI3a'
 ];

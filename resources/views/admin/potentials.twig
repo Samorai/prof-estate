@@ -10,7 +10,10 @@
         <tr>
             <td>{{ data.name }}</td>
             <td>{{ data.potentials|join(', ') }}</td>
-            <td><a class="btn btn-default" href="/admin/potential/edit/{{ data.id }}">Edit</a></td>
+            <td>
+                <a class="btn btn-default" href="/admin/potential/edit/{{ data.id }}">Edit</a>
+                <a class="btn btn-danger" href="/admin/potential/delete/{{ data.id }}" onclick="if (!confirm('Are you sure?')){return false;}">Delete</a>
+            </td>
         </tr>
     {% endfor %}
         <tr>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\Response;
+use App\Models\CheckedSites;
 use App\Models\Potentials;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
@@ -99,14 +100,21 @@ class IndexController extends BaseController
     /**
      * @param \Illuminate\Http\Request $request
      * @param \App\Http\Services\Response $response
+     * @param \App\Models\CheckedSites $checkedSites
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function jsonResult(Request $request, Response $response)
+    public function jsonResult(Request $request, Response $response, CheckedSites $checkedSites)
     {
         $start = new \DateTime(date('Y-m-d H:i:s', $request->session()->get('start')));
         $end = new \DateTime(date('Y-m-d H:i:s', $request->session()->get('end')));
         $interval = date_interval_create_from_date_string('1 month');
         $name = 'Visits from ' . $start->format('M, Y') . ' to ' . $end->format('M, Y');
+        $website = $request->session()->get('website');
+        $modelData = [
+            'website' => $website,
+            'competitors' => [],
+            'series' => []
+        ];
         $dates = [];
         while ($start <= $end) {
             $dates[] = $start->format('M, Y');
@@ -118,7 +126,7 @@ class IndexController extends BaseController
         $website_traffic = $request->session()->get('website_traffic');
         $potential = $this->managePotential($potential, $website_traffic);
         $series[] = [
-            'name' => $request->session()->get('website'),
+            'name' => $website,
             'data' => $website_traffic,
             'color' => 'blue',
             'marker' => ['symbol' => 'circle'],
@@ -131,6 +139,9 @@ class IndexController extends BaseController
                 'color' => ($key == 0) ? 'green' : 'orange',
                 'marker' => ['symbol' => 'circle'],
             ];
+
+            $modelData['competitors'][] = $competitor['site'];
+
             $potential = $this->managePotential($potential, $competitor['traffic']);
         }
 
@@ -140,6 +151,10 @@ class IndexController extends BaseController
             'color' => 'red',
             'marker' => ['symbol' => 'circle'],
         ];
+
+        $modelData['series'] = $series;
+        $modelData['dates'] = $dates;
+        $checkedSites->setAttributes($modelData)->save();
 
         return $response->json(['name' => $name, 'dates' => $dates, 'series' => $series]);
     }
