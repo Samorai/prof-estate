@@ -49,8 +49,8 @@ class IndexController extends BaseController
                 $end_site_checking,
                 false
             )->getValues();
-        } catch (\Exception $e){
-            $resp = [0,0,0,0,0,0];
+        } catch (\Exception $e) {
+            $resp = [0, 0, 0, 0, 0, 0];
         }
         $website_traffic = array_values($resp);
 
@@ -71,8 +71,7 @@ class IndexController extends BaseController
         }
 
         $potential = $this->managePotential($potential, $website_traffic);
-        foreach ($competitors_traffic_data as $competitor)
-        {
+        foreach ($competitors_traffic_data as $competitor) {
             $potential = $this->managePotential($potential, $competitor['traffic']);
         }
         $potential_calls = round(((end($potential) + prev($potential) + prev($potential)) / 3) * 0.02);
@@ -84,6 +83,7 @@ class IndexController extends BaseController
             'website' => $website_host,
             'competitors' => $competitors_traffic_data,
             'potential' => $potential,
+            'country' => $request->get('country_select'),
         ]);
 
         return view('result.twig',
@@ -113,7 +113,7 @@ class IndexController extends BaseController
         $modelData = [
             'website' => $website,
             'competitors' => [],
-            'series' => []
+            'series' => [],
         ];
         $dates = [];
         while ($start <= $end) {
@@ -132,7 +132,7 @@ class IndexController extends BaseController
             'marker' => ['symbol' => 'circle'],
         ];
         $competitors = $request->session()->get('competitors', []);
-        foreach ($competitors as $key=>$competitor) {
+        foreach ($competitors as $key => $competitor) {
             $series[] = [
                 'name' => $competitor['site'],
                 'data' => $competitor['traffic'],
@@ -154,6 +154,7 @@ class IndexController extends BaseController
 
         $modelData['series'] = $series;
         $modelData['dates'] = $dates;
+        $modelData['country'] = $request->session()->get('country');
         $checkedSites->setAttributes($modelData)->save();
 
         return $response->json(['name' => $name, 'dates' => $dates, 'series' => $series]);
@@ -183,7 +184,7 @@ class IndexController extends BaseController
 
     private function getCompetitorsData($similarWebClient, $start, $end, $website_traffic, $competitor_site)
     {
-        $competitor_site_host = preg_replace("(^https?://(www\\.)?|^www\\.)", "", $competitor_site );
+        $competitor_site_host = preg_replace("(^https?://(www\\.)?|^www\\.)", "", $competitor_site);
         try {
             $resp = $similarWebClient->getTrafficProResponse(
                 $competitor_site_host,
@@ -192,8 +193,8 @@ class IndexController extends BaseController
                 $end,
                 false
             )->getValues();
-        } catch (\Exception $e){
-            $resp = [0,0,0,0,0,0];
+        } catch (\Exception $e) {
+            $resp = [0, 0, 0, 0, 0, 0];
         }
 
         $competitor_traffic = array_values($resp);
@@ -215,6 +216,7 @@ class IndexController extends BaseController
         if ($smaller == 0) {
             $smaller = 1;
         }
+
         return round(($greater - $smaller) / $smaller * 100);
     }
 }
