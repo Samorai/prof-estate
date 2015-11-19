@@ -7,7 +7,6 @@ use App\Models\CheckedSites;
 use App\Models\Potentials;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Thunder\SimilarWebApi\ClientFacade as SimilarWebClient;
 
 class IndexController extends BaseController
@@ -16,9 +15,10 @@ class IndexController extends BaseController
      * @param \App\Models\Potentials $potentials
      * @return \Illuminate\View\View
      */
-    public function index(Potentials $potentials)
+    public function index(Request $request, Potentials $potentials)
     {
-        return view('index.twig', ['csrf_token' => csrf_token(), 'potentials' => $potentials->getPotentialsList()]);
+
+        return view('index.twig', ['csrf_token' => csrf_token(), 'potentials' => $potentials->getPotentialsList(), 'selected' => $request->get('site')]);
     }
 
     /**
