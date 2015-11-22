@@ -21,4 +21,6 @@ $app->group(['prefix' => '/admin', 'middleware' => 'auth', 'namespace' => 'App\H
 
     $app->get('/settings', ['uses' => 'AdminController@getSettings']);
     $app->post('/settings', ['uses' => 'AdminController@editSettings']);
+
+    $app->get('/setting/delete/{id}', ['uses' => 'AdminController@deleteSetting']);
 });

@@ -35,6 +35,13 @@ class AdminController extends BaseController
         return redirect('/admin');
     }
 
+    public function deleteSetting($id)
+    {
+        Settings::findById($id)->delete();
+
+        return redirect('/admin/settings');
+    }
+
     public function dataChecked($id, Response $response)
     {
         $checked = CheckedSites::findById($id);
