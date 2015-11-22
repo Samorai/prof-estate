@@ -6,7 +6,6 @@
             <th>Contry</th>
             <th>First Competitor</th>
             <th>Second competitor</th>
-            <th>Time</th>
             <th>&nbsp;</th>
         </tr>
         {% for checkedSite in checkedSites %}
@@ -15,7 +14,6 @@
                 <td>{{ checkedSite.country }}</td>
                 <td>{{ checkedSite.competitors[0] }}</td>
                 <td>{{ checkedSite.competitors[1] }}</td>
-                <td>{{ checkedSite.created_at }}</td>
                 <td>
                     <a class="btn btn-default" href="/admin/checked/view/{{ checkedSite.id }}">View</a>
                     <a class="btn btn-danger" onclick="if (!confirm('Are you sure?')){return false;}" href="/admin/checked/delete/{{ checkedSite.id }}">Delete</a>
