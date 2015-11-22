@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Services\Response;
 use App\Models\CheckedSites;
 use App\Models\Potentials;
+use App\Models\Settings;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
@@ -74,5 +75,29 @@ class AdminController extends BaseController
         }
 
         return redirect('/admin/potentials');
+    }
+
+    public function getSettings()
+    {
+        return view('admin/settings.twig',
+            ['csrf_token' => csrf_token(), 'settings' => Settings::all()]);
+    }
+
+    public function editSettings(Request $request, Settings $settings)
+    {
+        if ($new = $request->get('new')) {
+            $settings->setAttributes($new)->save();
+        }
+
+        if ($updated = $request->get('updated'))
+        {
+            foreach ($updated as $key=>$value) {
+                $setting = Settings::where(['key' => $key])->first();
+                $setting->value = $value;
+                $setting->save();
+            }
+        }
+
+        return redirect('/admin/settings');
     }
 }

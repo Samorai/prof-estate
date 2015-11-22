@@ -1,5 +1,7 @@
 <?php
 return [
-    'oleg.samorai@gmail.com',
-    'arismiatov@prof.estate'
+    'ren@prof.estate',
+    'ladyzhenska@prof.estate',
+    'korposh@prof.estate',
+    'arismiatov@prof.estate',
 ];

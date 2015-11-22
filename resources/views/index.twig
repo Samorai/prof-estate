@@ -1,12 +1,12 @@
 {% extends 'inc/layout.twig' %}
 {% block main %}
     <div class="section col-800w">
-        <h1>Analysis of activity<br>on the internet</h1>
+        <h1 style="width: 50%;">{{ texts.index_txt_title }}</h1>
         <div class="form">
             <form id="search_form" method="POST" action="/result">
                 <label class="form__row row">
                     <div class="col-sm-3">
-                        <div class="input-label-big pink">Country</div>
+                        <div class="input-label-big pink">{{ texts.index_txt_country }}</div>
                     </div>
                     <div class="col-sm-7 col-sm-offset-1">
                         <div class="select">
@@ -21,7 +21,7 @@
                 <input type="hidden" name="_token" value="{{ csrf_token }}">
                 <label class="form__row row">
                     <div class="col-sm-3">
-                        <div class="input-label-big pink">Your site</div>
+                        <div class="input-label-big pink">{{ texts.index_txt_your_site }}</div>
                     </div>
                     <div class="col-sm-7 col-sm-offset-1">
                         <input placeholder="type site" class="input"name="your_site" id="your_site" value="{{ selected }}" required>
@@ -36,7 +36,7 @@
                 </div>
                 <label class="form__row row" style="margin-top: 0px;">
                     <div class="col-sm-3">
-                        <div class="input-label-big pink">Your competitor's site 1</div>
+                        <div class="input-label-big pink">{{ texts.index_txt_comp_1 }}</div>
                     </div>
                     <div class="col-sm-7 col-sm-offset-1">
                         <input placeholder="type your competitor's site 1 http://site.com/" class="input" id="competitor_site_1" name="competitor_site_1">
@@ -44,7 +44,7 @@
                 </label>
                 <label class="form__row row">
                     <div class="col-sm-3">
-                        <div class="input-label-big pink">Your competitor's site 2</div>
+                        <div class="input-label-big pink">{{ texts.index_txt_comp_1 }}</div>
                     </div>
                     <div class="col-sm-7 col-sm-offset-1">
                         <input placeholder="type your competitor's site 2 http://site.com/" class="input"  id="competitor_site_2" name="competitor_site_2">

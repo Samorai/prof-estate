@@ -1,7 +1,8 @@
 {% extends 'inc/layout.twig' %}
 {% block main %}
+    {% autoescape false %}
     <div class="section col-1000w">
-        <h1>Result of analysis</h1>
+        <h1>{{ texts.res_txt_title }}</h1>
 
         <div class="graph">
             <div class="graph__content" id="container"></div>
@@ -11,15 +12,14 @@
         <div class="row border-between">
             <div class="col-sm-5 col-sm-offset-1">
                 <div class="icon icon-bright section-icon"></div>
-                <div class="header-text">Is your online<br>channel effective?</div>
+                <div class="header-text">{{ texts.res_txt_first_group_title }}</div>
             </div>
             <div class="col-sm-6 section__text">
                 <div class="header-big pull-right">{{ channel_efficiency }}</div>
-                <div class="header-text">The number of calls<br>that you have<br>to receive each month</div>
-                <p>If you do not get this amount of calls, you should analyze<br>your advertising activities on the
-                    Internet.</p>
+                <div class="header-text">{{ texts.res_txt_first_group_txt_1 }}</div>
+                <p>{{ texts.res_txt_first_group_txt_2 }}</p>
 
-                <div class="header-text pink">Do you want to know<br>how to increase efficacy?</div>
+                <div class="header-text pink">{{ texts.res_txt_first_group_txt_3 }}</div>
                 <div class="btn btn_3d btn_pink"  onclick="location.href='#submit_form'; $('#bottom_form_name').focus();">Order free express analysis</div>
             </div>
         </div>
@@ -28,12 +28,12 @@
         <div class="row border-between">
             <div class="col-sm-5 col-sm-offset-1">
                 <div class="icon icon-exclamation section-icon"></div>
-                <div class="header-text">Your potential</div>
+                <div class="header-text">{{ texts.res_txt_second_group_title }}</div>
             </div>
             <div class="col-sm-6 section__text">
                 <div class="header-big pull-right">{{ potential_calls }}</div>
-                <div class="header-text">The number of calls<br>that you can receive<br>each month</div>
-                <div class="header-text pink">Do you want to know<br>how to get it?</div>
+                <div class="header-text">{{ texts.res_txt_second_group_txt_1 }}</div>
+                <div class="header-text pink">{{ texts.res_txt_second_group_txt_2 }}</div>
                 <div class="btn btn_3d btn_pink"  onclick="location.href='#submit_form'; $('#bottom_form_name').focus();">Order free express analysis</div>
             </div>
         </div>
@@ -43,7 +43,7 @@
             <div class="row border-between">
                 <div class="col-sm-5 col-sm-offset-1">
                     <div class="icon icon-winner section-icon"></div>
-                    <div class="header-text">How are your<br>competitors?</div>
+                    <div class="header-text">{{ texts.res_txt_third_group_title }}</div>
                 </div>
                 <div class="col-sm-6 section__text">
                     {% for data in competitors_traffic_data %}
@@ -52,7 +52,7 @@
                             you
                         </div>
                     {% endfor %}
-                    <div class="header-text pink">Do you want to now how<br>to get ahead of the competition?</div>
+                    <div class="header-text pink">{{ texts.res_txt_third_group_txt_1 }}</div>
                     <div class="btn btn_3d btn_pink" onclick="location.href='#submit_form'; $('#bottom_form_name').focus();">Order free express analysis</div>
                 </div>
             </div>
@@ -61,15 +61,12 @@
     <div class="section col-1000w">
         <div class="row">
             <div class="col-sm-6">
-                <h1>Do you want to lower customer acquisition costs?</h1>
-                <p>Let's start with the analysis of your curren online presence and compare it to best practices and
-                    your competitors:</p>
+                <h1>{{ texts.res_txt_order }}</h1>
+                <p>{{ texts.res_txt_order_txt_1 }}</p>
                 <ul class="pink">
-                    <li>You vs best industry practices</li>
-                    <li>You vs your closest competitors</li>
+                    {{ texts.res_txt_order_li }}
                 </ul>
-                <p>All you need to do is input your website and you will get your free custom made PDF report prepared
-                    by our market analysis team.</p>
+                <p>{{ texts.res_txt_order_txt_2 }}</p>
             </div>
             <div class="col-sm-6 section__text">
                 <br>
@@ -97,6 +94,7 @@
             </div>
         </div>
     </div>
+    {% endautoescape %}
 {% endblock %}
 {% block js %}
     <script>

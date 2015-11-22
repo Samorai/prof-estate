@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Services\Response;
 use App\Models\CheckedSites;
 use App\Models\Potentials;
+use App\Models\Settings;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Thunder\SimilarWebApi\ClientFacade as SimilarWebClient;
@@ -12,22 +13,29 @@ use Thunder\SimilarWebApi\ClientFacade as SimilarWebClient;
 class IndexController extends BaseController
 {
     /**
+     * @param \Illuminate\Http\Request $request
      * @param \App\Models\Potentials $potentials
+     * @param \App\Models\Settings $settings
      * @return \Illuminate\View\View
      */
-    public function index(Request $request, Potentials $potentials)
+    public function index(Request $request, Potentials $potentials, Settings $settings)
     {
-
-        return view('index.twig', ['csrf_token' => csrf_token(), 'potentials' => $potentials->getPotentialsList(), 'selected' => $request->get('site')]);
+        return view('index.twig', [
+            'csrf_token' => csrf_token(),
+            'potentials' => $potentials->getPotentialsList(),
+            'selected' => $request->get('site'),
+            'texts' => $settings->getIndexTexts(),
+        ]);
     }
 
     /**
      * @param \Illuminate\Http\Request $request
      * @param \Thunder\SimilarWebApi\ClientFacade $similarWebClient
      * @param \App\Models\Potentials $potentials
+     * @param \App\Models\Settings $settings
      * @return \Illuminate\View\View
      */
-    public function result(Request $request, SimilarWebClient $similarWebClient, Potentials $potentials)
+    public function result(Request $request, SimilarWebClient $similarWebClient, Potentials $potentials, Settings $settings)
     {
         $website = $request->get('your_site');
         $website_host = preg_replace("(^https?://(www\\.)?|^www\\.)", "", $website);
@@ -92,6 +100,7 @@ class IndexController extends BaseController
                 'channel_efficiency' => $channel_efficiency,
                 'website' => $website,
                 'competitors_traffic_data' => $competitors_traffic_data,
+                'texts' => $settings->getResultTexts(),
                 'csrf_token' => csrf_token(),
             ]
         );
@@ -167,8 +176,11 @@ class IndexController extends BaseController
     {
         $body = sprintf("Website: %s \nContact name: %s\nContact: %s\n", $request->get('website_name'),
             $request->get('user_name'), $request->get('contact_info'));
-
-        mail(join(',', config('emails')), 'Order: Express Analysis', $body);
+        $emails = Settings::where(['key'=>'emails'])->first()->value;
+        if (empty($emails)) {
+            $emails = join(',', config('emails'));
+        }
+        mail($emails, 'Order: Express Analysis', $body);
     }
 
     private function managePotential($potential, $traffic)
