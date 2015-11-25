@@ -1,6 +1,7 @@
 {% extends 'inc/admin_layout.twig' %}
 {% block body %}
     <h1>Checked site {{ checkedSite.website }}</h1>
+    <h2>Email: <a href="mailto:{{ checkedSite.email }}" target="_top">{{ checkedSite.email }}</a></h2>
     {% if checkedSite.competitors %}
         <h2>Competitors</h2>
         <ul>

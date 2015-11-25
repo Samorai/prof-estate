@@ -15,6 +15,7 @@ class Settings extends Base
         'index_txt_your_site' => 'Your site',
         'index_txt_comp_1' => 'Your competitor\'s site 1',
         'index_txt_comp_2' => 'Your competitor\'s site 2',
+        'index_txt_your_email' => 'Your email'
     ];
 
     protected $default_result_texts = [

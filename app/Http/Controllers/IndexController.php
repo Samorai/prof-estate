@@ -38,6 +38,7 @@ class IndexController extends BaseController
     public function result(Request $request, SimilarWebClient $similarWebClient, Potentials $potentials, Settings $settings)
     {
         $website = $request->get('your_site');
+        $email = $request->get('your_email');
         $website_host = preg_replace("(^https?://(www\\.)?|^www\\.)", "", $website);
         $full_month = strtotime('now -1 months');
         $start_checking = strtotime('now -6 months');
@@ -92,6 +93,7 @@ class IndexController extends BaseController
             'competitors' => $competitors_traffic_data,
             'potential' => $potential,
             'country' => $request->get('country_select'),
+            'email' => $email
         ]);
 
         return view('result.twig',
@@ -119,8 +121,10 @@ class IndexController extends BaseController
         $interval = date_interval_create_from_date_string('1 month');
         $name = 'Visits from ' . $start->format('M, Y') . ' to ' . $end->format('M, Y');
         $website = $request->session()->get('website');
+        $email = $request->session()->get('email');
         $modelData = [
             'website' => $website,
+            'email' => $email,
             'competitors' => [],
             'series' => [],
         ];

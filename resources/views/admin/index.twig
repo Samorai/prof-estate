@@ -3,6 +3,7 @@
     <table class="table table-bordered">
         <tr>
             <th>Name</th>
+            <th>Email</th>
             <th>Contry</th>
             <th>First Competitor</th>
             <th>Second competitor</th>
@@ -11,6 +12,7 @@
         {% for checkedSite in checkedSites %}
             <tr>
                 <td>{{ checkedSite.website }}</td>
+                <td><a href="mailto:{{ checkedSite.email }}" target="_top">{{ checkedSite.email }}</a></td>
                 <td>{{ checkedSite.country }}</td>
                 <td>{{ checkedSite.competitors[0] }}</td>
                 <td>{{ checkedSite.competitors[1] }}</td>
