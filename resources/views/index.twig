@@ -25,7 +25,7 @@
                         <div class="input-label-big pink">{{ texts.index_txt_your_site }}</div>
                     </div>
                     <div class="col-sm-7 col-sm-offset-1">
-                        <input placeholder="type site" class="input"name="your_site" id="your_site" value="{{ selected }}" required>
+                        <input placeholder="type site" class="input"name="your_site" id="your_site" value="{{ selected }}" pattern="^[^\s]+$" required>
                     </div>
                 </label>
                 <label class="form__row row">

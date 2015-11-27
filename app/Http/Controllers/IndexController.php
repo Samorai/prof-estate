@@ -47,8 +47,8 @@ class IndexController extends BaseController
         $month_start = date('n', $start_checking);
         $start_site_checking = date('m-Y', $start_checking);
         $end_site_checking = date('m-Y', $full_month);
-
-        $potential = $potentials->getPotential($request->get('country_select'), $month_start, $month_end);
+        $country = $request->get('country_select');
+        $potential = $potentials->getPotential($country, $month_start, $month_end);
 
         try {
             $resp = $similarWebClient->getTrafficProResponse(
@@ -92,7 +92,7 @@ class IndexController extends BaseController
             'website' => $website_host,
             'competitors' => $competitors_traffic_data,
             'potential' => $potential,
-            'country' => $request->get('country_select'),
+            'country' => $country,
             'email' => $email
         ]);
 
@@ -104,8 +104,14 @@ class IndexController extends BaseController
                 'competitors_traffic_data' => $competitors_traffic_data,
                 'texts' => $settings->getResultTexts(),
                 'csrf_token' => csrf_token(),
+                'show_potential' => $this->showPotential($country)
             ]
         );
+    }
+
+    private function showPotential($country)
+    {
+        return !($country == 'Other');
     }
 
     /**
@@ -157,13 +163,14 @@ class IndexController extends BaseController
 
             $potential = $this->managePotential($potential, $competitor['traffic']);
         }
-
-        $series[] = [
-            'name' => 'Potential',
-            'data' =>  array_map('intval', $potential),
-            'color' => 'red',
-            'marker' => ['symbol' => 'circle'],
-        ];
+        if ($this->showPotential($request->session()->get('country'))) {
+            $series[] = [
+                'name' => 'Potential',
+                'data' => array_map('intval', $potential),
+                'color' => 'red',
+                'marker' => ['symbol' => 'circle'],
+            ];
+        }
 
         $modelData['series'] = $series;
         $modelData['dates'] = $dates;

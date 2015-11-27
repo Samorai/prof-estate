@@ -12,7 +12,8 @@ class Potentials extends Base
     private $potentials = [
         'UAE' => [
             40000, 42000, 43000, 45000, 43000, 46000, 48000, 50000, 47000, 46000, 48000, 46000
-        ]
+        ],
+        'Other' => []
     ];
 
     public function getPotential($country, $month_start, $month_end)
@@ -21,7 +22,8 @@ class Potentials extends Base
         $month_end -= 1;
         $potential = [];
         $data = self::where(['name' => $country])->first();
-        foreach (self::where(['name' => $country])->first()->getAttribute('potentials') as $key=>$value)
+        $potentials = ($data) ? $data->getAttribute('potentials') : array_fill(0,11,0);
+        foreach ($potentials as $key=>$value)
         {
             if ($key >= $month_start && $key <= $month_end) {
                 $potential[] = $value;
@@ -37,6 +39,9 @@ class Potentials extends Base
         foreach ($potentials as $potential)
         {
             $return[] = $potential->name;
+        }
+        if ($return) {
+            $return[] = 'Other';
         }
         return ($return) ? $return : array_keys($this->potentials);
     }
