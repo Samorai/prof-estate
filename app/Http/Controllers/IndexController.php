@@ -61,7 +61,7 @@ class IndexController extends BaseController
         } catch (\Exception $e) {
             $resp = [0, 0, 0, 0, 0, 0];
         }
-        $website_traffic = array_values($resp);
+        $website_traffic = array_map('intval', array_values($resp));
 
         $channel_efficiency = round(((end($website_traffic) + prev($website_traffic) + prev($website_traffic)) / 3) * 0.02);
         $website_traffic_sum = array_sum($website_traffic);
