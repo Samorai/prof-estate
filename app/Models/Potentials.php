@@ -22,13 +22,29 @@ class Potentials extends Base
         $month_end -= 1;
         $potential = [];
         $data = self::where(['name' => $country])->first();
+
         $potentials = ($data) ? $data->getAttribute('potentials') : array_fill(0,11,0);
-        foreach ($potentials as $key=>$value)
-        {
-            if ($key >= $month_start && $key <= $month_end) {
-                $potential[] = $value;
+
+
+        if ($month_end < $month_start) {
+            foreach ($potentials as $key => $value) {
+                if ($key >= $month_start) {
+                    $potential[] = $value;
+                }
+            }
+            for ($i=0; $i <= $month_end; $i++)  {
+                $potential[] = $potentials[$i];
+            }
+
+        } else {
+            foreach ($potentials as $key=>$value) {
+                if ($key >= $month_start && $key <= $month_end) {
+                    $potential[] = $value;
+                }
             }
         }
+        
+        //xdebug_var_dump([$month_start,$month_end,$potential, $potentials]);exit;
         return $potential;
     }
 

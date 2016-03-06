@@ -50,6 +50,8 @@ class IndexController extends BaseController
         $country = $request->get('country_select');
         $potential = $potentials->getPotential($country, $month_start, $month_end);
 
+        //xdebug_var_dump([$month_start,$month_end, $country, $potential]);exit;
+
         try {
             $resp = $similarWebClient->getTrafficProResponse(
                 $website_host,
@@ -59,7 +61,16 @@ class IndexController extends BaseController
                 false
             )->getValues();
         } catch (\Exception $e) {
-            $resp = [0, 0, 0, 0, 0, 0];
+            if ($e->getCode() == 404) {
+                $resp = $similarWebClient->getTrafficProResponse(
+                                $website_host,
+                                'monthly',
+                                $start_site_checking,
+                                date('m-Y', strtotime('now -2 months')),
+                                false
+                            )->getValues();
+            }
+            //$resp = [0, 0, 0, 0, 0, 0];
         }
         $website_traffic = array_map('intval', array_values($resp));
 
