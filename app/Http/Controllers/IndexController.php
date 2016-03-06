@@ -48,30 +48,31 @@ class IndexController extends BaseController
         $start_site_checking = date('m-Y', $start_checking);
         $end_site_checking = date('m-Y', $full_month);
         $country = $request->get('country_select');
+
+
+
         $potential = $potentials->getPotential($country, $month_start, $month_end);
 
-        //xdebug_var_dump([$month_start,$month_end, $country, $potential]);exit;
 
-        try {
-            $resp = $similarWebClient->getTrafficProResponse(
-                $website_host,
-                'monthly',
-                $start_site_checking,
-                $end_site_checking,
-                false
-            )->getValues();
-        } catch (\Exception $e) {
-            if ($e->getCode() == 404) {
-                $resp = $similarWebClient->getTrafficProResponse(
-                                $website_host,
-                                'monthly',
-                                $start_site_checking,
-                                date('m-Y', strtotime('now -2 months')),
-                                false
-                            )->getValues();
+        
+        $resp = $this->getSimilarWedData($similarWebClient, $website_host, $start_site_checking, $end_site_checking);
+        if ($resp === false) {
+            $full_month = strtotime('now -2 months');
+            $start_checking = strtotime('now -7 months');
+            $month_start = date('n', $start_checking);
+            $start_site_checking = date('m-Y', $start_checking);
+            $month_end = date('n', $full_month);
+            $end_site_checking = date('m-Y', $full_month);
+
+            $potential = $potentials->getPotential($country, $month_start, $month_end);
+            
+
+            $resp = $this->getSimilarWedData($similarWebClient, $website_host, $start_site_checking, $end_site_checking);
+            if ($resp === false) {
+                $resp = [0,0,0,0,0,0];
             }
-            //$resp = [0, 0, 0, 0, 0, 0];
         }
+
         $website_traffic = array_map('intval', array_values($resp));
 
         $channel_efficiency = round(((end($website_traffic) + prev($website_traffic) + prev($website_traffic)) / 3) * 0.02);
@@ -118,6 +119,21 @@ class IndexController extends BaseController
                 'show_potential' => $this->showPotential($country)
             ]
         );
+    }
+    private function getSimilarWedData($similarWebClient,$website_host, $start_site_checking, $end_site_checking)
+    {
+        try {
+            $resp = $similarWebClient->getTrafficProResponse(
+                $website_host,
+                'monthly',
+                $start_site_checking,
+                $end_site_checking,
+                false
+            )->getValues();
+        } catch (\Exception $e) {
+            $resp = false;
+        }
+        return $resp;
     }
 
     private function showPotential($country)
